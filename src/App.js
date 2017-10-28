@@ -63,7 +63,7 @@ class App extends Component {
                 {
                   (props.fields) ?
                   <LabelEditor image={props.image} fields={props.fields} /> : 
-                  <div class="DropZone-Container">
+                  <div className="DropZone-Container">
                     <Dropzone className="DropZone" onDrop={files => this.onDrop(files)}> Drag or Click <br/> to Upload </Dropzone>
                   </div>
                 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import store from './store'
 import { connect } from 'react-redux';
+import Transition from 'react-transition-group/Transition';
 
 class LabelEditor extends Component {
     constructor(props) {
@@ -9,7 +10,6 @@ class LabelEditor extends Component {
             labels: this.props.fields,
             value: this.props.fields
         };
-        // this.handleChange = this.handleChange.bind(this);        
     }
 
     handleChange = (fieldId, newContent) => {
@@ -22,12 +22,6 @@ class LabelEditor extends Component {
         
     }
 
-    // shouldComponentUpdate(nextProps){
-    //     if(this.props != nextProps) {
-    //         return true
-    //     }
-    //     return false;
-    // }
 
     alignText(align){
         if (align === 0) {
@@ -43,13 +37,20 @@ class LabelEditor extends Component {
         }
     }
 
-    render() {
+    transformText(transform){
+        if (transform === 0) {
+            return 'none';
+        } else if (transform === 1) {
+            return 'uppercase';
+        } else if (transform === 2) {
+            return 'lowercase';
+        }
+    }
 
+    render() {
         const props = this.props;
         const fields = props.fields;
         console.log('my labels ->', fields);
-        
-
         return (
             <div className="LabelEditor">
                 <img className="image" alt="artboad" src={this.props.image} />
@@ -68,9 +69,10 @@ class LabelEditor extends Component {
                                 left: field.position.x + 'px',
                                 top: field.position.y + 'px',
                                 fontFamily: field.font.family.replace(/\s+/g, '-'),
-                                color: field.font.color,
-                                letterSpacing: field.font.letterSpacing,
-                                textAlign:  this.alignText('align')
+                                color: field.font.color.toString(),
+                                letterSpacing: field.font.letterSpacing + 'px',
+                                textAlign:  this.alignText(field.font.textAlignment),
+                                textTransform: this.transformText(field.font.textTransform)
                             }
                         }
                     />) 

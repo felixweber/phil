@@ -17,7 +17,7 @@ class Header extends Component {
     handleExport(newFields){
         // var data = "text/json;charset=utf-8," + encodeURIComponent();
         var blob = new Blob([JSON.stringify(newFields.labels)], {type: "text/json;charset=utf-8"});
-        FileSaver.saveAs(blob, "labels.json");
+        FileSaver.saveAs(blob, "edited-labels.json");
         console.log('booboo', newFields);
     }
 
