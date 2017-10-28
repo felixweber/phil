@@ -18,12 +18,24 @@ const addImageData = (state = initialState, action, image, fields) => {
       break;
     case 'ADD_FIELDS':
         var newFields = action.fields    
-        newState = Object.assign({}, state, {fields: newFields})
+        newState = Object.assign({}, state, {fields: newFields, newFields: newFields})
       break;
-    case 'CHANGE_FIELDS':
-        var changedFields = action.fields    
-        newState = Object.assign({}, state, {newFields: changedFields})
-      break;      
+    case 'CHANGE_FIELD':
+        var fieldId = action.fieldId;
+        var fieldContent = action.fieldContent;
+
+        var field = newState.newFields.labels
+            .find(field => field.id === fieldId);
+
+        if(!field) {
+            console.log('oh no');
+            return;
+        }
+
+        field.content = fieldContent;
+
+        // newState = Object.assign({}, state, {newFields: changedFields})
+      break;     
   }
   return newState;
 }

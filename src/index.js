@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import WebFont from 'webfontloader';
 import store from './store';
 
-var foo = WebFont.load({
+WebFont.load({
   google: {
     families: ['heebo', 'roboto']
   }

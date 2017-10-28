@@ -12,36 +12,37 @@ class LabelEditor extends Component {
         // this.handleChange = this.handleChange.bind(this);        
     }
 
-    handleChange = (fields) => {
-        console.log('changes', fields)
+    handleChange = (fieldId, newContent) => {
+        console.log('changes', fieldId, newContent);
         store.dispatch({
-            type: 'CHANGE_FIELDS',
-            fields: fields
+            type: 'CHANGE_FIELD',
+            fieldContent: newContent,
+            fieldId: fieldId
         });
         
     }
 
-    shouldComponentUpdate(nextProps){
-        if(this.props != nextProps) {
-            return true
-        }
-        return false;
-    }
+    // shouldComponentUpdate(nextProps){
+    //     if(this.props != nextProps) {
+    //         return true
+    //     }
+    //     return false;
+    // }
 
     render() {
 
         const props = this.props;
         const fields = props.fields;
-        console.log('my labels ->', props.fields );
+        console.log('my labels ->', fields);
         
 
         return (
             <div className="LabelEditor">
-                <img className="image" src={this.props.image} />
+                <img className="image" alt="artboad" src={this.props.image} />
 
-                { this.props.fields.labels.map(field => 
+                { fields.labels.map(field => 
                     <textarea
-                        onChange={(e) => this.handleChange(e.target.value)}
+                        onChange={(e) => this.handleChange(field.id, e.target.value)}
                         className='input-field' 
                         key={field.id} 
                         defaultValue={field.content} 
@@ -52,7 +53,8 @@ class LabelEditor extends Component {
                                 fontSize: field.font.size + 'px',
                                 left: field.position.x + 'px',
                                 top: field.position.y + 'px',
-                                fontFamily: field.font.family 
+                                fontFamily: field.font.family,
+                                color: field.font.color 
                             }
                         }
                     />) 

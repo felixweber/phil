@@ -63,8 +63,9 @@
   height: 100px;
   width: 100%;
   border-color: orange;
-  border-bottom: 2px solid orange;
-  padding-top: 10px;
+  background-color: #0B2026;
+  display: flex;
+  justify-content: flex-end;  
 }
 
 .Header .Logo {
@@ -72,8 +73,13 @@
   height: 80px;
   width: 80px;
   border: 2px solid black;
-  margin-left: 20PX;
   border-radius: 50%;
+  background-image: url('./phil-logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin: auto;
+  margin-left: 20px;
 
 }
 
@@ -81,35 +87,50 @@
   display: inline-block;
   height: 60px;
   width: 300px;
-  border: 2px solid black;
   margin-left: 40px;
+  color: white;
+  font-size: 16px;
   display: none;
+
 }
 
-.Header .ExportButton {
+.Header .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header .buttons .ExportButton {
   display: inline-block;
   height: 20px;
-  width: 80px;
+  width: 100px;
   border: 2px solid black;
   float: right;
   margin-right: 80px;
-  margin-top: 40px;
   text-align: center;
   line-height: 20px;
+  border-radius: 20px;
+  background-color: white;
 }
 
-.Header .ImportButton {
+.Header .buttons .ImportButton {
   display: inline-block;
   height: 20px;
-  width: 80px;
+  width: 100px;
   border: 2px solid black;
   float: right;
-  margin-right: 80px;
-  margin-top: 40px;
+  margin-right: 20px;
   text-align: center;
   line-height: 20px;
+  border-radius: 20px;
+  background-color: white;  
 }
 
 .Header .ImportButton:hover {
-  background-color: green; 
+  /*background-color: green; */
+  cursor: pointer;
+}
+.Header .ExportButton:hover {
+  /*background-color: green; */
+  cursor: pointer;
 }

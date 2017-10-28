@@ -3,7 +3,6 @@ import LabelEditor from './LabelEditor';
 import { connect } from 'react-redux';
 import './App.css';
 import Header from './Header'
-import store from './store'
 
 class App extends Component {
     constructor(props) {
@@ -20,9 +19,9 @@ class App extends Component {
             <div className="app-container">
                 <Header />
                 {
-                  (this.props.fields) ?
-                  <LabelEditor image={this.props.image} fields={this.props.fields} /> : 
-                  null
+                  (props.fields) ?
+                  <LabelEditor image={props.image} fields={props.fields} /> : 
+                  <p> Please Import Some Files </p>
                 }
             </div>
         );
