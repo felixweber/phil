@@ -1,10 +1,11 @@
 var initialState = {
     image: null, 
-    fields: null
+    fields: null,
+    newFields: null
 }
 
 
-const addImageData = (state = initialState, action, image) => {
+const addImageData = (state = initialState, action, image, fields) => {
   if(state === undefined) {
     return initialState;
   }
@@ -19,6 +20,10 @@ const addImageData = (state = initialState, action, image) => {
         var newFields = action.fields    
         newState = Object.assign({}, state, {fields: newFields})
       break;
+    case 'CHANGE_FIELDS':
+        var changedFields = action.fields    
+        newState = Object.assign({}, state, {newFields: changedFields})
+      break;      
   }
   return newState;
 }

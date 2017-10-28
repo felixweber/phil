@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-/* global window, document, FileReader */
-/* eslint-disable */
-
-import WebFont from 'webfontloader';
+import store from './store'
+import { connect } from 'react-redux';
 
 class LabelEditor extends Component {
     constructor(props) {
@@ -14,11 +12,21 @@ class LabelEditor extends Component {
         // this.handleChange = this.handleChange.bind(this);        
     }
 
-    // handleChange(event){
-    //     this.setState({
-    //         value: this.state.value.values.concat([event.target.value])
-    //     })
-    // }
+    handleChange = (fields) => {
+        console.log('changes', fields)
+        store.dispatch({
+            type: 'CHANGE_FIELDS',
+            fields: fields
+        });
+        
+    }
+
+    shouldComponentUpdate(nextProps){
+        if(this.props != nextProps) {
+            return true
+        }
+        return false;
+    }
 
     render() {
 
@@ -33,11 +41,10 @@ class LabelEditor extends Component {
 
                 { this.props.fields.labels.map(field => 
                     <textarea
-                        // onChange={this.handleChange}
+                        onChange={(e) => this.handleChange(e.target.value)}
                         className='input-field' 
                         key={field.id} 
-                        // value={this.state.value.labels[field.id]} 
-                        value={field.content} 
+                        defaultValue={field.content} 
                         style={
                             {
                                 width: field.size.width + 'px',
@@ -55,4 +62,12 @@ class LabelEditor extends Component {
     }
 }
 
-export default LabelEditor;
+function mapStateToProps(state) {
+    return {
+        image: state.image,
+        fields: state.fields
+    };
+}
+
+export default connect(mapStateToProps)(LabelEditor);
+

@@ -54,8 +54,8 @@ class Header extends Component {
             <div className="Header">
                 <div className="Logo"> </div>
                 <div className="FileName"> </div>
-                <Dropzone className="ImportButton" onDrop={files => this.onDrop(files)}> Import </Dropzone>
                 <div className="ExportButton"> Export </div>
+                <Dropzone className="ImportButton" onDrop={files => this.onDrop(files)}> Import </Dropzone>
             </div>
         );
     }
