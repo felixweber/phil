@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import LabelEditor from './LabelEditor';
+import { connect } from 'react-redux';
 import './App.css';
+import Header from './Header'
+import store from './store'
 /* global window, document, FileReader */
 /* eslint-disable */
 
@@ -12,16 +15,28 @@ class App extends Component {
             image: null,
             fields: null
         };
-        // this.onDrop = this.onDrop.bind(this);
+        this.handleAddImage = this.handleAddImage.bind(this);
+        this.handleAddFields = this.handleAddFields.bind(this);
+
+    }
+    handleAddImage(image){
+      store.dispatch({
+        type: 'ADD_IMAGE',
+        image: image
+      }); 
+    }
+    handleAddFields(fields){
+      store.dispatch({
+        type: 'ADD_FIELDS',
+        fields: fields
+      });      
     }
 
     onDrop(files) {
         console.log('dropped some files', files, files.length);
         for (let i = 0; i < files.length; i++) {
             if (files[i].name === 'preview.png') {
-                this.setState({
-                    image: files[i].preview
-                });
+              this.handleAddImage(files[i].preview)
             } 
             else if (files[i].name === 'labels.json') {
                   const reader = new FileReader();
@@ -30,39 +45,37 @@ class App extends Component {
                     // console.log('fileAsBinary', fileAsBinaryString);
                     const json = JSON.parse(fileAsBinaryString);
                    // do whatever you want with the file content
-                    this.setState({
-                      fields: json
-                    })
+                    this.handleAddFields(json)
                   };
                   reader.onabort = () => console.log('file reading was aborted');
                   reader.onerror = () => console.log('file reading has failed');
                   reader.readAsBinaryString(files[i]);
             }
-            console.log('done');
         }
-    }
-
-    getImage() {
-    }
-
-    getFields() {
     }
 
     render() {
         const props = this.props;
         return (
             <div className="app-container">
+                <Header />
                 <div className="phil" > HELLO HACKATHON</div>
                 <Dropzone onDrop={files => this.onDrop(files)} />
                 {
-                  (this.state.fields) ?
-                  <LabelEditor image={this.state.image} fields={this.state.fields} /> : 
+                  (this.props.fields) ?
+                  <LabelEditor image={this.props.image} fields={this.props.fields} /> : 
                   null
                 }
-                
             </div>
         );
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        image: state.image,
+        fields: state.fields
+    };
+}
+
+export default connect(mapStateToProps)(App);

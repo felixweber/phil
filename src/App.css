@@ -54,3 +54,57 @@
   padding: 0;
   border: none;
 }
+
+.Header {
+  height: 100px;
+  width: 100%;
+  border-color: orange;
+  border-bottom: 2px solid orange;
+  padding-top: 10px;
+}
+
+.Header .Logo {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  border: 2px solid black;
+  margin-left: 20PX;
+  border-radius: 50%;
+
+}
+
+.Header .FileName {
+  display: inline-block;
+  height: 60px;
+  width: 300px;
+  border: 2px solid black;
+  margin-left: 40px;
+}
+
+.Header .ExportButton {
+  display: inline-block;
+  height: 20px;
+  width: 80px;
+  border: 2px solid black;
+  float: right;
+  margin-right: 80px;
+  margin-top: 40px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.Header .ImportButton {
+  display: inline-block;
+  height: 20px;
+  width: 80px;
+  border: 2px solid black;
+  float: right;
+  margin-right: 80px;
+  margin-top: 40px;
+  text-align: center;
+  line-height: 20px;  
+}
+
+.Header .ImportButton:hover {
+  background-color: green; 
+}
