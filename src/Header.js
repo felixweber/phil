@@ -12,54 +12,14 @@ class Header extends Component {
             // labels: this.props.fields,
             // value: this.props.fields
         };
-        this.handleAddImage = this.handleAddImage.bind(this);
-        this.handleAddFields = this.handleAddFields.bind(this);
         this.handleExport = this.handleExport.bind(this);      
-    }
-    handleAddImage(image){
-      store.dispatch({
-        type: 'ADD_IMAGE',
-        image: image
-      }); 
-    }
-    handleAddFields(fields){
-      store.dispatch({
-        type: 'ADD_FIELDS',
-        fields: fields
-      });      
     }
     handleExport(newFields){
         // var data = "text/json;charset=utf-8," + encodeURIComponent();
-        
         var blob = new Blob([JSON.stringify(newFields.labels)], {type: "text/json;charset=utf-8"});
-        FileSaver.saveAs(blob, "labels.txt");
-
+        FileSaver.saveAs(blob, "labels.json");
         console.log('booboo', newFields);
-
     }
-
-    onDrop(files) {
-        console.log('dropped some files', files, files.length);
-        for (let i = 0; i < files.length; i++) {
-            if (files[i].name === 'preview.png') {
-              this.handleAddImage(files[i].preview)
-            } 
-            else if (files[i].name === 'labels.json') {
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    const fileAsBinaryString = reader.result;
-                    // console.log('fileAsBinary', fileAsBinaryString);
-                    const json = JSON.parse(fileAsBinaryString);
-                   // do whatever you want with the file content
-                    this.handleAddFields(json)
-                  };
-                  reader.onabort = () => console.log('file reading was aborted');
-                  reader.onerror = () => console.log('file reading has failed');
-                  reader.readAsBinaryString(files[i]);
-            }
-        }
-    }
-
 
     render() {
         const props = this.props;
@@ -73,8 +33,9 @@ class Header extends Component {
                 <div className="Logo"> </div>
                 <div className="FileName"> Placheholder for Artboard Name </div>
                 <div className="buttons">
-                    <Dropzone className="ImportButton" onDrop={files => this.onDrop(files)}> Import </Dropzone>
-                    <div className="ExportButton" onClick={() => this.handleExport(props.newFields)}> Export </div>
+                    {
+                        props.image ? <div className="ExportButton" onClick={() => this.handleExport(props.newFields)}> Export </div> : null
+                    }
                 </div>
             </div>
         );

@@ -29,6 +29,20 @@ class LabelEditor extends Component {
     //     return false;
     // }
 
+    alignText(align){
+        if (align === 0) {
+            return 'left';
+        } else if (align === 1) {
+            return 'right';
+        } else if (align === 2) {
+            return 'center';
+        } else if (align === 3) {
+            return 'justified';
+        } else if (align === "align") {
+            return 'right';
+        }
+    }
+
     render() {
 
         const props = this.props;
@@ -53,8 +67,10 @@ class LabelEditor extends Component {
                                 fontSize: field.font.size + 'px',
                                 left: field.position.x + 'px',
                                 top: field.position.y + 'px',
-                                fontFamily: field.font.family,
-                                color: field.font.color 
+                                fontFamily: field.font.family.replace(/\s+/g, '-'),
+                                color: field.font.color,
+                                letterSpacing: field.font.letterSpacing,
+                                textAlign:  this.alignText('align')
                             }
                         }
                     />) 

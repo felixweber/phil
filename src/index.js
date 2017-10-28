@@ -9,7 +9,7 @@ import store from './store';
 
 WebFont.load({
   google: {
-    families: ['heebo', 'roboto']
+    families: ['lato', 'lato-bold']
   }
 })
 
