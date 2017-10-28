@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import store from './store'
 import { connect } from 'react-redux';
+var FileSaver = require('file-saver');
 
 
 class Header extends Component {
@@ -28,8 +29,13 @@ class Header extends Component {
       });      
     }
     handleExport(newFields){
-        // var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(newFields.labels));
-        console.log('booboo', newFields)
+        // var data = "text/json;charset=utf-8," + encodeURIComponent();
+        
+        var blob = new Blob([JSON.stringify(newFields.labels)], {type: "text/json;charset=utf-8"});
+        FileSaver.saveAs(blob, "labels.txt");
+
+        console.log('booboo', newFields);
+
     }
 
     onDrop(files) {
